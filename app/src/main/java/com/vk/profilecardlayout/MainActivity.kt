@@ -19,20 +19,26 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.vk.profilecardlayout.ui.theme.MyTheme
+import com.vk.profilecardlayout.ui.theme.lightGreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MainScreen()
+            MyTheme {
+                MainScreen()
+            }
         }
     }
 }
 
 @Composable
 fun MainScreen() {
-    Surface(color = Color.LightGray,
-        modifier = Modifier.fillMaxSize()) {
+    Surface(
+        color = Color.LightGray,
+        modifier = Modifier.fillMaxSize()
+    ) {
         ProfileCard()
     }
 }
@@ -44,6 +50,7 @@ fun ProfileCard() {
         .fillMaxWidth()
         .wrapContentHeight(align = Alignment.Top),
         elevation = 8.dp,
+        backgroundColor = Color.White
         ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -59,7 +66,7 @@ fun ProfileCard() {
 @Composable
 fun ProfilePicture() {
     Card(shape = CircleShape,
-        border = BorderStroke(width = 2.dp, color = Color.Red),
+        border = BorderStroke(width = 2.dp, color = MaterialTheme.colors.lightGreen),
         modifier = Modifier.padding(16.dp),
         elevation = 4.dp
     ) {
@@ -75,11 +82,26 @@ fun ProfilePicture() {
 
 @Composable
 fun ProfileContent() {
-    Text(text = "John Doe")
+    Column(
+        modifier = Modifier
+            .padding(8.dp)
+            .fillMaxWidth()
+    ) {
+        Text(
+            text = "Sasha Gray",
+            style = MaterialTheme.typography.h5
+        )
+        Text(
+            text = "Active now",
+            style = MaterialTheme.typography.body2,
+        )
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    MainScreen()
+    MyTheme {
+        MainScreen()
+    }
 }
